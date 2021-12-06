@@ -1,20 +1,22 @@
 import './sources.css';
+import { EveryThingApiResponseArticlesEntitySource } from '../../controller/apiInterfaces';
 
 class Sources {
-  draw(data) {
+  draw(data: EveryThingApiResponseArticlesEntitySource[]) {
     const fragment = document.createDocumentFragment();
-    const sourceItemTemp = document.querySelector('#sourceItemTemp');
+    const sourceItemTemp = document.querySelector('#sourceItemTemp') as HTMLTemplateElement;
+    data.forEach((item: EveryThingApiResponseArticlesEntitySource) => {
+      const sourceClone = sourceItemTemp.content.cloneNode(true) as DocumentFragment;
+      const srcItemName = sourceClone.querySelector('.source__item-name') as HTMLSpanElement;
+      const srcItem = sourceClone.querySelector('.source__item') as HTMLDivElement;
 
-    data.forEach((item) => {
-      const sourceClone = sourceItemTemp.content.cloneNode(true);
-
-      sourceClone.querySelector('.source__item-name').textContent = item.name;
-      sourceClone.querySelector('.source__item').setAttribute('data-source-id', item.id);
+      srcItemName.textContent = item.name;
+      srcItem.setAttribute('data-source-id', item.id);
 
       fragment.append(sourceClone);
     });
 
-    document.querySelector('.sources').append(fragment);
+    (document.querySelector('.sources') as HTMLDivElement).append(fragment);
   }
 }
 
