@@ -1,4 +1,5 @@
 import './news.css';
+import '../../../img/news_placeholder.jpg';
 import { EveryThingApiResponseArticlesEntity } from '../../controller/apiInterfaces';
 
 class News {
@@ -22,7 +23,7 @@ class News {
       if (idx % 2) newsItem.classList.add('alt');
 
       const urlToImage =
-        item.urlToImage == null || item.urlToImage == 'null' ? './src/img/news_placeholder.jpg' : item.urlToImage;
+        item.urlToImage == null || item.urlToImage == 'null' ? './img/news_placeholder.jpg' : item.urlToImage;
 
       newsPhoto.style.backgroundImage = `url(${urlToImage})`;
       newsAuthor.textContent = item.author || item.source.name;
